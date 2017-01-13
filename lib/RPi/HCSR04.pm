@@ -35,7 +35,6 @@ sub new {
     $self->trig($t);
     $self->echo($t);
 }
-
 sub inch {
     return inch_c();
 }
@@ -108,6 +107,11 @@ no parameters.
 
 Returns an integer representing the return from the sensor in raw original
 form. Takes no parameters.
+
+=head1 REQUIREMENTS
+
+* L<wiringPi|http://wiringpi.com> must be installed.
+* At this time, your program will have to be run as root (under C<sudo>).
 
 =head1 AUTHOR
 
