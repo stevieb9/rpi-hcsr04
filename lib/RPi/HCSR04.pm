@@ -3,24 +3,28 @@ package RPi::HCSR04;
 use strict;
 use warnings;
 
+our $VERSION = '0.01';
+
 require XSLoader;
 XSLoader::load('RPi::HCSR04', $VERSION);
 
-our $VERSION = '0.01';
-
 BEGIN {
+    no strict 'refs';
+
     my @subs = qw(trig echo);
 
-    for (@subs){
-        my ($self, $p) = @_;
+    for my $sub (@subs){
+        *$sub = sub {
+            my ($self, $p) = @_;
 
-        if (defined $p){
-            if ($p < 0 && $p > 40){
-                die "$_ pin number '$p' is out of range\n";
+            if (defined $p){
+                if ($p < 0 && $p > 40){
+                    die "$sub pin number '$p' is out of range\n";
+                }
+                $self->{$sub} = $p;
             }
-            $self->{$_} = $p;
+            return $self->{$sub};
         }
-        return $self->{$_};
     }
 }
 
@@ -33,17 +37,25 @@ sub new {
     }
 
     $self->trig($t);
-    $self->echo($t);
+    $self->echo($e);
+
+    setup($t, $e);
+
+    return $self;
 }
 sub inch {
-    return inch_c();
+    my $self = shift;
+    return inch_c($self->trig, $self->echo);
 }
 sub cm {
-    return cm_c();
+    my $self = shift;
+    return cm_c($self->trig, $self->echo);
 }
 sub raw {
-    return raw_c();
+    my $self = shift;
+    return raw_c($self->trig, $self->echo);
 }
+sub _vim{};
 
 1;
 __END__
@@ -74,6 +86,21 @@ Easy to use interface to retrieve distance measurements from the HC-SR04
 ultrasonic distance measurement sensor.    
 
 Requires L<wiringPi|http://wiringpi.com> to be installed.
+
+=head1 VOLTAGE DIVIDER
+
+The HC-SR04 sensor requires 5V input, and that is returned back to a Pi GPIO
+pin from the C<ECHO> output on the sensor. The GPIO on the Pi can only handle
+a maximum of 3.3V in, so either a voltage regulator or a voltage divider must
+be used to ensure you don't damage the Pi.
+
+Here's a diagram showing how to create a voltage divider with a 1k and a 2k
+Ohm resistor to lower the C<ECHO> voltage output down to a safe ~3.29V. In this
+case, C<TRIG> is connected to GPIO 18, and C<ECHO> is connected to GPIO 23.
+
+=begin html
+<p><img src="https://stevieb9.github.io/rpi-hcsr04/hcsr04.png" alt="conn img" /></p>
+=end html
 
 =head1 METHODS
 
@@ -112,6 +139,8 @@ form. Takes no parameters.
 
 * L<wiringPi|http://wiringpi.com> must be installed.
 * At this time, your program will have to be run as root (under C<sudo>).
+* You must regulate the voltage from the C<ECHO> pin down to a safe 3.3V from
+the 5V input. See L</VOLTAGE DIVIDER> for details.
 
 =head1 AUTHOR
 

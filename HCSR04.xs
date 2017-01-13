@@ -7,9 +7,6 @@
 #include <stdbool.h>
 #include <wiringPi.h>
 
-int echo;
-int trig;
-
 bool setup(int trig, int echo){
  
     int setup_mode = -1;
@@ -34,10 +31,10 @@ bool setup(int trig, int echo){
     
     delay(30);
    
-    return TRUE;
+    return 1;
 }
  
-float fetch() {
+long fetch(int trig, int echo) {
 
     digitalWrite(trig, HIGH);
     delayMicroseconds(20);
@@ -49,39 +46,48 @@ float fetch() {
 
     // wait for echo end
 
-    long startTime = micros();
+    long start_time = micros();
     while(digitalRead(echo) == HIGH);
-    long travelTime = micros() - startTime;
+    long travel_time = micros() - start_time;
 
-    // inches
-
-    float distance = ((float)travelTime / 2) / 74;
-    return distance;
+    return travel_time;
 }
 
-float cm_c (){
-    float inches  = inch();
+float inch_c (int trig, int echo){
+    int raw = fetch(trig, echo);
+    float res = ((float)raw / 2) / 74;
+    return res;
+}
+
+float cm_c (int trig, int echo){
+    float inches = inch_c(trig, echo);
     return inches * 2.54;
 }
 
-float inch_c (){
-    int raw = fetch();
-    return ((float)raw / 2) / 74;
-}
-
-float raw_c (){
-    return fetch();
+long raw_c (int trig, int echo){
+    return fetch(trig, echo);
 }
 
 MODULE = RPi::HCSR04  PACKAGE = RPi::HCSR04
 
 PROTOTYPES: DISABLE
 
-float
-inch_c ()
+bool
+setup(trig, echo)
+    int trig
+    int echo
 
 float
-cm_c ()
+inch_c(trig, echo)
+    int trig
+    int echo
 
 float
-raw_c ()
+cm_c (trig, echo)
+    int trig
+    int echo
+
+int
+raw_c (trig, echo)
+    int trig
+    int echo
