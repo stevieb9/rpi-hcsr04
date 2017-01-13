@@ -4,6 +4,11 @@ use Test::More;
 
 use RPi::HCSR04;
 
+if (! $ENV{PI_BOARD}){
+    plan skip_all => "not a Pi board: PI_BOARD not set";
+    exit;
+}
+
 my $mod = 'RPi::HCSR04';
 
 {

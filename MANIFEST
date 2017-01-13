@@ -1,6 +1,5 @@
 Changes
 docs/hcsr04.png
-docs/index.html
 HCSR04.xs
 lib/RPi/HCSR04.pm
 Makefile.PL
