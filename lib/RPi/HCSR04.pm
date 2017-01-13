@@ -11,7 +11,7 @@ XSLoader::load('RPi::HCSR04', $VERSION);
 BEGIN {
     no strict 'refs';
 
-    my @subs = qw(trig echo);
+    my @subs = qw(_trig _echo);
 
     for my $sub (@subs){
         *$sub = sub {
@@ -36,8 +36,8 @@ sub new {
         die "new() requires both a trig and echo pin number sent in\n";
     }
 
-    $self->trig($t);
-    $self->echo($e);
+    $self->_trig($t);
+    $self->_echo($e);
 
     setup($t, $e);
 
@@ -45,15 +45,15 @@ sub new {
 }
 sub inch {
     my $self = shift;
-    return inch_c($self->trig, $self->echo);
+    return inch_c($self->_trig, $self->_echo);
 }
 sub cm {
     my $self = shift;
-    return cm_c($self->trig, $self->echo);
+    return cm_c($self->_trig, $self->_echo);
 }
 sub raw {
     my $self = shift;
-    return raw_c($self->trig, $self->echo);
+    return raw_c($self->_trig, $self->_echo);
 }
 sub _vim{};
 
@@ -134,6 +134,26 @@ no parameters.
 
 Returns an integer representing the return from the sensor in raw original
 form. Takes no parameters.
+
+=head1 C FUNCTIONS
+
+These are to be only used within the module itself.
+
+=head2 setup
+
+Performs the wiringPi setup routine.
+
+=head2 raw_c
+
+Called by C<raw()>.
+
+=head2 inch_c
+
+Called by C<inch()>.
+
+=head2 cm_c
+
+Called by C<cm()>.
 
 =head1 REQUIREMENTS
 
