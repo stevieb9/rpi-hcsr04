@@ -94,13 +94,10 @@ pin from the C<ECHO> output on the sensor. The GPIO on the Pi can only handle
 a maximum of 3.3V in, so either a voltage regulator or a voltage divider must
 be used to ensure you don't damage the Pi.
 
-Here's a diagram showing how to create a voltage divider with a 1k and a 2k
-Ohm resistor to lower the C<ECHO> voltage output down to a safe ~3.29V. In this
-case, C<TRIG> is connected to GPIO 18, and C<ECHO> is connected to GPIO 23.
-
-=begin html
-<p><img src="https://stevieb9.github.io/rpi-hcsr04/hcsr04.png" alt="conn img" /></p>
-=end html
+L<Here's|https://stevieb9.github.io/rpi-hcsr04/hcsr04.png> a diagram showing
+how to create a voltage divider with a 1k and a 2k Ohm resistor to lower the
+C<ECHO> voltage output down to a safe ~3.29V. In this case, C<TRIG> is
+connected to GPIO 18, and C<ECHO> is connected to GPIO 23.
 
 =head1 METHODS
 
