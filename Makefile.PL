@@ -11,6 +11,19 @@ WriteMakefile(
     LIBS             => ['-lwiringPi'],
     PL_FILES         => {},
     MIN_PERL_VERSION => 5.006,
+    META_MERGE => {
+        'meta-spec' => { version => 2 },
+        resources   => {
+            bugtracker => {
+                web => 'https://github.com/stevieb9/rpi-hcsr04/issues',
+            },
+            repository => {
+                type => 'git',
+                url => 'https://github.com/stevieb9/rpi-hcsr04.git',
+                web => 'https://github.com/stevieb9/rpi-hcsr04',
+            },
+        },
+    },
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
     },

@@ -97,7 +97,7 @@ be used to ensure you don't damage the Pi.
 L<Here's|https://stevieb9.github.io/rpi-hcsr04/hcsr04.png> a diagram showing
 how to create a voltage divider with a 1k and a 2k Ohm resistor to lower the
 C<ECHO> voltage output down to a safe ~3.29V. In this case, C<TRIG> is
-connected to GPIO 18, and C<ECHO> is connected to GPIO 23.
+connected to GPIO 23, and C<ECHO> is connected to GPIO 23.
 
 =head1 METHODS
 
@@ -155,7 +155,9 @@ Called by C<cm()>.
 =head1 REQUIREMENTS
 
 * L<wiringPi|http://wiringpi.com> must be installed.
+
 * At this time, your program will have to be run as root (under C<sudo>).
+
 * You must regulate the voltage from the C<ECHO> pin down to a safe 3.3V from
 the 5V input. See L</VOLTAGE DIVIDER> for details.
 
