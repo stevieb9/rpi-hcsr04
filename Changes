@@ -5,6 +5,7 @@ Revision history for RPi-HCSR04
         - corrected pin numbers in voltage divider section in POD (closes #4)
         - removed 'sudo' requirement from POD (closes #6)
         - renamed all C functions to private, and removed POD that outlined them
+        - added '-lrt' to Makefile.PL LIBS to avoid undefined 'shm_open' symbol
 
 0.02    2017-01-13
         - POD updates

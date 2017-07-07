@@ -54,7 +54,7 @@ long _fetch(int trig, int echo) {
 }
 
 float _inch (int trig, int echo){
-    int raw = fetch(trig, echo);
+    int raw = _fetch(trig, echo);
 
     float res = ((float)raw / 2) / 74;
 
@@ -62,12 +62,12 @@ float _inch (int trig, int echo){
 }
 
 float _cm (int trig, int echo){
-    float inches = inch_c(trig, echo);
+    float inches = _inch(trig, echo);
     return inches * 2.54;
 }
 
 long _raw (int trig, int echo){
-    return fetch(trig, echo);
+    return _fetch(trig, echo);
 }
 
 MODULE = RPi::HCSR04  PACKAGE = RPi::HCSR04

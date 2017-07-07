@@ -8,7 +8,7 @@ WriteMakefile(
     VERSION_FROM     => 'lib/RPi/HCSR04.pm',
     ABSTRACT_FROM    => 'lib/RPi/HCSR04.pm',
     LICENSE          => 'perl_5',
-    LIBS             => ['-lwiringPi'],
+    LIBS             => ['-lwiringPi -lrt'],
     PL_FILES         => {},
     MIN_PERL_VERSION => 5.006,
     META_MERGE => {
