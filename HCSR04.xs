@@ -57,9 +57,7 @@ long _fetch(int trig, int echo) {
 
 float _inch (int trig, int echo){
     int raw = _fetch(trig, echo);
-
     float res = ((float)raw / 2) / 74;
-
     return res;
 }
 
