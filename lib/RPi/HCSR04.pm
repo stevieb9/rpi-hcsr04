@@ -3,7 +3,7 @@ package RPi::HCSR04;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '2.3601';
 
 require XSLoader;
 XSLoader::load('RPi::HCSR04', $VERSION);
