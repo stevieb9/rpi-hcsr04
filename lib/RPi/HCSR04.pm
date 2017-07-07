@@ -87,6 +87,15 @@ ultrasonic distance measurement sensor.
 
 Requires L<wiringPi|http://wiringpi.com> to be installed.
 
+=head1 TIMING WITHIN A LOOP
+
+This software does no timing whatsoever; it operates as fast as your device
+will allow it.
+
+This often causes odd results. It's recommended that if you put your checks
+within a loop, to sleep for at least two milliseconds (C<0.02>). You can use
+C<select(undef, undef, undef, 0.02);>, or C<usleep()> from L<Time::HiRes>.
+
 =head1 VOLTAGE DIVIDER
 
 The HC-SR04 sensor requires 5V input, and that is returned back to a Pi GPIO
