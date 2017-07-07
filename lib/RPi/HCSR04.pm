@@ -39,21 +39,21 @@ sub new {
     $self->_trig($t);
     $self->_echo($e);
 
-    setup($t, $e);
+    _setup($t, $e);
 
     return $self;
 }
 sub inch {
     my $self = shift;
-    return inch_c($self->_trig, $self->_echo);
+    return _inch($self->_trig, $self->_echo);
 }
 sub cm {
     my $self = shift;
-    return cm_c($self->_trig, $self->_echo);
+    return _cm($self->_trig, $self->_echo);
 }
 sub raw {
     my $self = shift;
-    return raw_c($self->_trig, $self->_echo);
+    return _raw($self->_trig, $self->_echo);
 }
 sub _vim{};
 
@@ -131,26 +131,6 @@ no parameters.
 
 Returns an integer representing the return from the sensor in raw original
 form. Takes no parameters.
-
-=head1 C FUNCTIONS
-
-These are to be only used within the module itself.
-
-=head2 setup
-
-Performs the wiringPi setup routine.
-
-=head2 raw_c
-
-Called by C<raw()>.
-
-=head2 inch_c
-
-Called by C<inch()>.
-
-=head2 cm_c
-
-Called by C<cm()>.
 
 =head1 REQUIREMENTS
 

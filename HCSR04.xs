@@ -7,7 +7,7 @@
 #include <stdbool.h>
 #include <wiringPi.h>
 
-bool setup(int trig, int echo){
+bool _setup(int trig, int echo){
  
     int setup_mode = -1;
 
@@ -34,7 +34,7 @@ bool setup(int trig, int echo){
     return 1;
 }
  
-long fetch(int trig, int echo) {
+long _fetch(int trig, int echo) {
 
     digitalWrite(trig, HIGH);
     delayMicroseconds(20);
@@ -53,7 +53,7 @@ long fetch(int trig, int echo) {
     return travel_time;
 }
 
-float inch_c (int trig, int echo){
+float _inch (int trig, int echo){
     int raw = fetch(trig, echo);
 
     float res = ((float)raw / 2) / 74;
@@ -61,12 +61,12 @@ float inch_c (int trig, int echo){
     return res;
 }
 
-float cm_c (int trig, int echo){
+float _cm (int trig, int echo){
     float inches = inch_c(trig, echo);
     return inches * 2.54;
 }
 
-long raw_c (int trig, int echo){
+long _raw (int trig, int echo){
     return fetch(trig, echo);
 }
 
@@ -75,21 +75,21 @@ MODULE = RPi::HCSR04  PACKAGE = RPi::HCSR04
 PROTOTYPES: DISABLE
 
 bool
-setup(trig, echo)
+_setup(trig, echo)
     int trig
     int echo
 
 float
-inch_c(trig, echo)
+_inch(trig, echo)
     int trig
     int echo
 
 float
-cm_c (trig, echo)
+_cm (trig, echo)
     int trig
     int echo
 
 int
-raw_c (trig, echo)
+_raw (trig, echo)
     int trig
     int echo
