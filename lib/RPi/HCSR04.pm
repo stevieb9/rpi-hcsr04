@@ -62,8 +62,8 @@ __END__
 
 =head1 NAME
 
-RPi::HCSR04 - Interface to the HC-SR04 ultrasonic distance measurement sensor
-on the Raspberry Pi
+RPi::HCSR04 - Interface to the HC-SR04 ultrasonic distance measurement sensor on
+the Raspberry Pi
 
 =head1 SYNOPSIS
 
@@ -140,6 +140,8 @@ form. Takes no parameters.
 
 =item * You must regulate the voltage from the C<ECHO> pin down to a safe 3.3V
 from the 5V input. See L</VOLTAGE DIVIDER> for details.
+
+=back
 
 =head1 AUTHOR
 
