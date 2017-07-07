@@ -1,5 +1,8 @@
 Revision history for RPi-HCSR04
 
+2.3602 UNREL
+        -
+
 2.3601  2017-07-07
         - added github info to Makefile.PL (closes #3)
         - corrected pin numbers in voltage divider section in POD (closes #4)
