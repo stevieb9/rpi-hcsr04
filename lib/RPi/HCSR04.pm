@@ -154,12 +154,12 @@ Called by C<cm()>.
 
 =head1 REQUIREMENTS
 
-* L<wiringPi|http://wiringpi.com> must be installed.
+=over
 
-* At this time, your program will have to be run as root (under C<sudo>).
+=item * L<wiringPi|http://wiringpi.com> must be installed.
 
-* You must regulate the voltage from the C<ECHO> pin down to a safe 3.3V from
-the 5V input. See L</VOLTAGE DIVIDER> for details.
+=item * You must regulate the voltage from the C<ECHO> pin down to a safe 3.3V
+from the 5V input. See L</VOLTAGE DIVIDER> for details.
 
 =head1 AUTHOR
 

@@ -3,7 +3,8 @@ Revision history for RPi-HCSR04
 0.03 UNREL
         - added github info to Makefile.PL (closes #3)
         - corrected pin numbers in voltage divider section in POD (closes #4)
-         
+        - removed 'sudo' requirement from POD (closes #6)
+
 0.02    2017-01-13
         - POD updates
 
