@@ -37,27 +37,20 @@ bool _setup(int trig, int echo){
  
 long _fetch(int trig, int echo) {
 
-    long travel_time = -1;
-    
-    while (1){
-        digitalWrite(trig, HIGH);
-        delayMicroseconds(20);
-        digitalWrite(trig, LOW);
+    digitalWrite(trig, HIGH);
+    delayMicroseconds(20);
+    digitalWrite(trig, LOW);
 
-        // wait for echo
+    // wait for echo
 
-        while(digitalRead(echo) == LOW);
+    while(digitalRead(echo) == LOW);
 
-        // wait for echo end
+    // wait for echo end
 
-        long start_time = micros();
-        while(digitalRead(echo) == HIGH);
-        travel_time = micros() - start_time;
+    long start_time = micros();
+    while(digitalRead(echo) == HIGH);
 
-        if (travel_time > 0 && travel_time < 23088){
-            break;
-        }
-    }
+    long travel_time = micros() - start_time;
 
     return travel_time;
 }
