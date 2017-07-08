@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <wiringPi.h>
 
-bool _setup(int trig, int echo){
+int _setup(int trig, int echo){
  
     int setup_mode = -1;
 
@@ -56,14 +56,15 @@ long _fetch(int trig, int echo) {
 }
 
 float _inch (int trig, int echo){
-    int raw = _fetch(trig, echo);
-    float res = ((float)raw / 2) / 74;
-    return res;
+    long raw = _fetch(trig, echo);
+    float inch = ((float)raw / 2) / 74;
+    return inch;
 }
 
 float _cm (int trig, int echo){
-    float inches = _inch(trig, echo);
-    return inches * 2.54;
+    long raw = _fetch(trig, echo);
+    float cm = (((float)raw / 2) / 74) * 2.54;
+    return cm;
 }
 
 long _raw (int trig, int echo){
@@ -74,7 +75,7 @@ MODULE = RPi::HCSR04  PACKAGE = RPi::HCSR04
 
 PROTOTYPES: DISABLE
 
-bool
+int
 _setup(trig, echo)
     int trig
     int echo

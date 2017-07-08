@@ -2,6 +2,8 @@ Revision history for RPi-HCSR04
 
 2.3602  2017-07-07
         - revert out the loop in XS. Forgot about the warning
+        - modified XS so that _cm() and _inch() each do their own business;
+          _cm() doesn't call _inch() anymore
 
 2.3601  2017-07-07
         - added github info to Makefile.PL (closes #3)
