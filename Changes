@@ -1,6 +1,9 @@
 Revision history for RPi-HCSR04
 
-2.3604 UNREL
+2.3605 UNREL
+        -
+
+2.3604  2017-08-05
         - fixed t/05-new.t. Missed it in last update.
 
 2.3603  2017-08-04
