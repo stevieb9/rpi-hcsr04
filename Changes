@@ -1,5 +1,8 @@
 Revision history for RPi-HCSR04
 
+2.3604 UNREL
+        -
+
 2.3603  2017-08-04
         - modified tests with env var RPI_HCSR04, so that we don't test when it
           isn't feasible
