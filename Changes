@@ -1,7 +1,7 @@
 Revision history for RPi-HCSR04
 
 2.3604 UNREL
-        -
+        - fixed t/05-new.t. Missed it in last update.
 
 2.3603  2017-08-04
         - modified tests with env var RPI_HCSR04, so that we don't test when it
