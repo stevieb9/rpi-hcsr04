@@ -1,7 +1,10 @@
 Revision history for RPi-HCSR04
 
 2.3605 UNREL
-        -
+        - Fixed undefined behavior in HCSR04.xs _setup(): RPI_PIN_MODE was
+          re-stamped with putenv() of a stack buffer, leaving environ pointing
+          at a dead frame after return; now uses setenv(), which copies its
+          arguments
 
 2.3604  2017-08-05
         - fixed t/05-new.t. Missed it in last update.
