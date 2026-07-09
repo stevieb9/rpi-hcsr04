@@ -1,7 +1,10 @@
 Revision history for RPi-HCSR04
 
 3.1802 UNREL
-    -
+    - Added a Makefile.PL build guard: the family-canonical
+      RPi::Const::BuildCheck::wiringpi_build_check() (via CONFIGURE_REQUIRES),
+      so a missing or too-old wiringPi now exits NA rather than FAIL on CPAN
+      testers; this XS dist previously had no such guard
 
 3.1801    2026-06-12
         - Fixed undefined behavior in HCSR04.xs _setup(): RPI_PIN_MODE was
