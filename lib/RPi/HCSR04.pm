@@ -3,6 +3,8 @@ package RPi::HCSR04;
 use strict;
 use warnings;
 
+use Carp qw(croak);
+
 our $VERSION = '3.1802';
 
 require XSLoader;
@@ -18,8 +20,8 @@ BEGIN {
             my ($self, $p) = @_;
 
             if (defined $p){
-                if ($p < 0 && $p > 40){
-                    die "$sub pin number '$p' is out of range\n";
+                if ($p < 0 || $p > 40){
+                    croak "$sub pin number '$p' is out of range";
                 }
                 $self->{$sub} = $p;
             }
@@ -30,11 +32,13 @@ BEGIN {
 
 sub new {
     # trig, echo pins
-    my ($self, $t, $e) = @_;
+    my ($class, $t, $e) = @_;
 
     if (! defined $t || ! defined $e){
-        die "new() requires both a trig and echo pin number sent in\n";
+        croak "new() requires both a trig and echo pin number sent in";
     }
+
+    my $self = bless {}, $class;
 
     $self->_trig($t);
     $self->_echo($e);

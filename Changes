@@ -5,6 +5,16 @@ Revision history for RPi-HCSR04
       RPi::Const::BuildCheck::wiringpi_build_check() (via CONFIGURE_REQUIRES),
       so a missing or too-old wiringPi now exits NA rather than FAIL on CPAN
       testers; this XS dist previously had no such guard
+    - Fixed new(): it read the class name as the invocant and (under the
+      BEGIN block's no-strict-refs) stored the pins in a global package hash,
+      returning the class-name string instead of an object. It now blesses and
+      returns a real per-instance object
+    - Fixed the trig/echo pin range check: the guard used `$p < 0 && $p > 40`
+      (always false, so it never fired); it now rejects a pin below 0 or above 40
+    - Argument and range errors now croak (reporting the caller's location)
+      instead of die
+    - t/05-new.t no longer requires a Pi: it stubs the XS _setup() and covers
+      the blessing, per-instance state and pin-range validation HW-free
 
 3.1801    2026-06-12
         - Fixed undefined behavior in HCSR04.xs _setup(): RPI_PIN_MODE was
